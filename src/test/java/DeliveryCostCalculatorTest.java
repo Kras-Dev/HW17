@@ -39,7 +39,9 @@ public class DeliveryCostCalculatorTest {
     @ParameterizedTest
     @CsvSource({
             "5, small, false, normal, 400.0",
-            "25, large, true, very_high, 1120.0"
+            "25, large, true, very_high, 1120.0",
+            "1, small, true, elevated, 540.0",
+            "60, large, false, high, 700.0"
     })
     @DisplayName("Расчёт стоимости доставки для различных сценариев")
     public void testCalculateDeliveryParameterized(double distance, String size, boolean fragile, String workload, double expectedCost) {
