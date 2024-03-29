@@ -23,6 +23,10 @@ public class DeliveryCostCalculator {
                 return "Хрупкие грузы нельзя возить на расстояние более 30 км";
             }
         }
+        // проверка на null для переменной workload
+        if (workload == null) {
+            workload = "default";
+        }
 //загруженность службы доставки
         switch (workload) {
             case "very_high" -> cost *= 1.6;
