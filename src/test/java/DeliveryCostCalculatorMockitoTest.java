@@ -1,3 +1,5 @@
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ru.example.DeliveryCostCalculator;
@@ -6,10 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-
+@Tag("Mockito_тесты")
 public class DeliveryCostCalculatorMockitoTest {
 
     @Test
+    @DisplayName("Расчёт стоимости доставки груза под большие габариты")
     void testSizeIsLarge(){
         DeliveryCostCalculator mockCalculator = Mockito.mock(DeliveryCostCalculator.class);
         // Переопределяем поведение метода для параметра size равным "large"
@@ -20,6 +23,7 @@ public class DeliveryCostCalculatorMockitoTest {
     }
 
     @Test
+    @DisplayName("Расчёт стоимости доставки груза при высокой загруженности")
     void testWorkloadIsHigh() {
         DeliveryCostCalculator calculator = new DeliveryCostCalculator();
         DeliveryCostCalculator spyCalculator = Mockito.spy(calculator);
@@ -33,7 +37,8 @@ public class DeliveryCostCalculatorMockitoTest {
     }
 
     @Test
-    void testMathMax(){
+    @DisplayName("Сценарии расчёта стоимости доставки для разных входных параметров")
+    void testCalculateDeliveryWithAnyParams(){
         DeliveryCostCalculator mockCalculator = Mockito.mock(DeliveryCostCalculator.class);
         // Переопределяем поведение метода для параметра size равным "large"
         when(mockCalculator.calculateDeliveryCost(anyDouble(), anyString(), anyBoolean(), anyString()))
