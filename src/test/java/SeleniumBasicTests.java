@@ -21,10 +21,10 @@ public class SeleniumBasicTests {
         driver.get(BASE_URL);
     }
 
-//    @AfterAll
-//    void close(){
-//        driver.close();
-//    }
+    @AfterAll
+    void close(){
+        driver.close();
+    }
 
     @Test
     void testGetTitle(){
