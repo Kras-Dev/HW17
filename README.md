@@ -1,18 +1,18 @@
-# Проект с автоматизированным тестированием
+# Project with automated testing
 
-Данный проект создан с целью изучения автоматизированного тестирования с использованием популярных инструментов, таких как JUnit, Mockito, WireMock и Selenium.
+This project was created to study automated testing using popular tools such as JUnit, Mockito, WireMock and Selenium.
 
-## О проекте
+## About the project
 
-В этом проекте практикуемся в написании автоматизированных тестов с использованием следующих инструментов:
+In this project we practice writing automated tests using the following tools:
 
-- JUnit: для написания и запуска модульных тестов.
-- Mockito: для создания и работы с моками (поддельными объектами).
-- WireMock: для создания и эмуляции внешних HTTP-запросов и API.
-- Selenium: для автоматизации тестирования веб-интерфейса.
+- JUnit: for writing and running unit tests.
+- Mockito: for creating and working with mocks (fake objects).
+- WireMock: for creating and emulating external HTTP requests and APIs.
+- Selenium: to automate web interface testing.
 
-## Как начать
+## How to start
 
-1. Склонируйте репозиторий на свой локальный компьютер.
-2. Установите необходимые зависимости.
-3. Запустите тесты для проверки работоспособности.
+1. Clone the repository to your local computer.
+2. Install the required dependencies.
+3. Run sanity tests.
