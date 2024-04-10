@@ -4,6 +4,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import static SeleniumHelper.DriverUtils.setupDriver;
+
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("Selenium_Locators")
@@ -15,7 +17,7 @@ public class SeleniumLocatorsTest {
     @BeforeEach
     void init(){
         driver = new EdgeDriver();
-        driver.get(BASE_URL);
+        setupDriver(driver, BASE_URL);
     }
 
     @AfterAll
@@ -25,27 +27,21 @@ public class SeleniumLocatorsTest {
 
     @Test
     void locatorsExample() throws InterruptedException {
-        driver.get(BASE_URL);
-        driver.manage().window().fullscreen();
-
         //By.id
         WebElement inputTextForm = driver.findElement(By.id("my-text-id"));
         inputTextForm.sendKeys("inputTextForm");
-        Thread.sleep(1000);
         Assertions.assertEquals("inputTextForm",inputTextForm.getAttribute("value"),
                 "Значение в поле inputTextForm не соответствует ожидаемому");
 
         //By.cssSelector
         WebElement passwordForm = driver.findElement(By.cssSelector("[name='my-password']"));
         passwordForm.sendKeys("passwordForm");
-        Thread.sleep(1000);
         Assertions.assertEquals("passwordForm",passwordForm.getAttribute("value"),
                 "Значение в поле passwordForm не соответствует ожидаемому");
 
         //By.name
         WebElement textArea = driver.findElement(By.name("my-textarea"));
         textArea.sendKeys("my-textarea");
-        Thread.sleep(1000);
         Assertions.assertEquals("my-textarea",textArea.getAttribute("value"),
                 "Значение в поле textArea не соответствует ожидаемому");
 
@@ -54,11 +50,11 @@ public class SeleniumLocatorsTest {
         // Выбираем элемент из выпадающего списка по видимому тексту
         Select select = new Select(formSelect);
         select.selectByVisibleText("Two");
-        Thread.sleep(1000);
         WebElement selectedOption = select.getFirstSelectedOption();
         String selectedText = selectedOption.getText();
         Assertions.assertEquals("Two",selectedText,
                 "Значение formSelect не соответствует ожидаемому");
+        Assertions.assertTrue(select.getFirstSelectedOption().isSelected());
 
         //By.xpath
         WebElement dataList = driver.findElement(By.xpath("//datalist[@id='my-options']//option[@value='New York']"));
@@ -77,7 +73,6 @@ public class SeleniumLocatorsTest {
         //By.linkText
         WebElement linkText = driver.findElement(By.linkText("Return to index"));
         actions.moveToElement(linkText).click().perform();
-        Thread.sleep(1000);
         Assertions.assertEquals("https://bonigarcia.dev/selenium-webdriver-java/index.html", driver.getCurrentUrl(),
                 "Значение URL не соответствует ожидаемому");
     }
