@@ -22,7 +22,6 @@ public class DriverUtils {
         //если элемент доступен для взаимодействия
         if (element.isEnabled()) {
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            System.out.println("element " + element + "isEnabled");
         }
     }
     ///Метод для ожидание загрузки страницы
