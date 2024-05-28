@@ -7,7 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import java.io.File;
 import java.net.URL;
 
-import static SeleniumHelper.DriverUtils.*;
+import static seleniumHelper.DriverUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

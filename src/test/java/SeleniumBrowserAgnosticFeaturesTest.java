@@ -23,7 +23,18 @@ public class SeleniumBrowserAgnosticFeaturesTest {
     String mainTab;
 
     @BeforeAll
-    void start(){
+    void start() {
+        try {
+            driver = new EdgeDriver(createEdgeOptions());
+            driver.get(BASE_URL);
+        } catch (Exception e) {
+            // Вывод трассировки стека исключения
+            e.printStackTrace();
+        }
+    }
+
+
+    private EdgeOptions createEdgeOptions() {
         EdgeOptions edgeOptions = new EdgeOptions();
         // Устанавливаем стратегию загрузки страницы
         edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -35,9 +46,7 @@ public class SeleniumBrowserAgnosticFeaturesTest {
         edgeOptions.setScriptTimeout(Duration.ofSeconds(30));
         // Устанавливаем неявное время ожидания элементов на странице
         edgeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
-        // Создаем драйвер с опциями
-        driver = new EdgeDriver(edgeOptions);
-        driver.get(BASE_URL);
+        return edgeOptions;
     }
 
     @BeforeEach
@@ -66,7 +75,9 @@ public class SeleniumBrowserAgnosticFeaturesTest {
 
     @AfterAll
     void quit(){
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test

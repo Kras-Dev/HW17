@@ -4,7 +4,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import static SeleniumHelper.DriverUtils.setupDriver;
+import static seleniumHelper.DriverUtils.setupDriver;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -26,7 +26,7 @@ public class SeleniumLocatorsTest {
     }
 
     @Test
-    void locatorsExample() throws InterruptedException {
+    void locatorsExample(){
         //By.id
         WebElement inputTextForm = driver.findElement(By.id("my-text-id"));
         inputTextForm.sendKeys("inputTextForm");
@@ -76,4 +76,5 @@ public class SeleniumLocatorsTest {
         Assertions.assertEquals("https://bonigarcia.dev/selenium-webdriver-java/index.html", driver.getCurrentUrl(),
                 "Значение URL не соответствует ожидаемому");
     }
+
 }

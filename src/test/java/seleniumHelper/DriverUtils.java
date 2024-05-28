@@ -1,4 +1,4 @@
-package SeleniumHelper;
+package seleniumHelper;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+import static constants.Constants.PAGE_LOAD_TIMEOUT;
 
 public class DriverUtils {
     //Метод для настройки драйвера и открытия указанной страницы
@@ -26,7 +28,7 @@ public class DriverUtils {
     }
     ///Метод для ожидание загрузки страницы
     public static void waitForPageToLoad(WebDriver driver, String url) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(PAGE_LOAD_TIMEOUT));
         wait.until(ExpectedConditions.urlToBe(url));
     }
 }
