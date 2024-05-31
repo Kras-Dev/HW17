@@ -1,34 +1,50 @@
+import allureSteps.BaseStepsAll;
+import extensions.AllureExtensions;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Link;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import pages.WebFormPage;
 import java.io.File;
-import java.net.URL;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("Web_Form_Page_Test")
-public class WebFormPageTest {
+
+@Epic("Testing with Allure")
+@Link(name="", value = "", url = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html")
+@Feature("Web form page tests")
+@ExtendWith(AllureExtensions.class)
+public class WebFormPageTest extends BaseStepsAll {
     private final static String URL = "https://bonigarcia.dev/selenium-webdriver-java/web-form.html";
 
     WebFormPage webFormPage;
 
     @BeforeAll
-    void setup() {
-        webFormPage = new WebFormPage("edge");
+    void setUp() {
+        webFormPage = new WebFormPage(getDriver());
         webFormPage.openUrl(URL);
+    }
+    @AfterEach
+    void pause() throws InterruptedException {
+        Thread.sleep(3000);
     }
 
     @AfterAll
-    void teardown() throws InterruptedException {
+    void tearDown() throws InterruptedException {
         Thread.sleep(5000);
         webFormPage.quit();
     }
 
     @Test
     @DisplayName("Text input test")
+    @Step("Input Text")
     void textInputTest(){
         WebElement textInput = webFormPage.getTextInput();
         webFormPage.enterText(textInput, "test");
@@ -37,6 +53,7 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Password input test")
+    @Step("Input Password")
     void passwordInputTest(){
         WebElement passwordInput = webFormPage.getPasswordInput();
         webFormPage.enterText(passwordInput, "test");
@@ -45,19 +62,22 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Text area input test")
+    @Step("Text area input")
     void textAreaInputTest(){
         WebElement textAreaInput = webFormPage.getTextArea();
         webFormPage.enterText(textAreaInput, "test");
-        Assertions.assertEquals("test", textAreaInput.getAttribute("value"));
+        Assertions.assertEquals("test", textAreaInput.getText());
     }
     @Test
     @DisplayName("Disabled input test")
+    @Step("Disabled input field")
     void disabledInputTest(){
         WebElement disabledInput = webFormPage.getDisabledInput();
         Assertions.assertFalse(disabledInput.isEnabled());
     }
     @Test
     @DisplayName("Readonly input test")
+    @Step("Read only field")
     void readonlyInputTest(){
         WebElement readonlyInput = webFormPage.getReadonlyInput();
         String value = readonlyInput.getAttribute("value");
@@ -66,6 +86,7 @@ public class WebFormPageTest {
     }
     @Test
     @DisplayName("Return to index test")
+    @Step("Link")
     void returnToIndexTest(){
         WebElement linkText = webFormPage.getLink();
         webFormPage.moveToElement(linkText);
@@ -74,9 +95,9 @@ public class WebFormPageTest {
                 "Значение URL не соответствует ожидаемому");
         webFormPage.navigateBack();
     }
-
     @Test
     @DisplayName("Dropdown select test")
+    @Step("Dropdown select")
     void dropdownSelectTest(){
         WebElement dropdownSelect = webFormPage.getDropdownSelect();
         Select select = new Select(dropdownSelect);
@@ -91,6 +112,7 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("File input test")
+    @Step("File input")
     void fileInputTest(){
         WebElement fileInput = webFormPage.getFileInput();
         //получаем URL ресурса "test.txt", используя загрузчик классов текущего класса
@@ -120,6 +142,7 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Check box test")
+    @Step("CheckBox")
     void checkBoxTest(){
         WebElement checkedCheckbox = webFormPage.getCheckedCheckbox();
         Assertions.assertTrue(checkedCheckbox.isSelected());
@@ -133,6 +156,7 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Radio button test")
+    @Step("Radio button")
     void radioTest(){
         WebElement checkedRadio = webFormPage.getCheckedRadio();
         Assertions.assertTrue(checkedRadio.isSelected());
@@ -144,24 +168,29 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Color picker test")
+    @Step("Color picker")
     void colorPickerTest(){
         WebElement colorPicker = webFormPage.getColorPicker();
         webFormPage.click(colorPicker);
         Assertions.assertTrue(colorPicker.isDisplayed());
         Assertions.assertEquals("#563d7c", colorPicker.getAttribute("value"));
+        colorPicker.clear();
     }
 
     @Test
     @DisplayName("Date picker test")
+    @Step("Date picker")
     void datePickerTest(){
         WebElement datePicker = webFormPage.getDatePicker();
         datePicker.sendKeys("2024-04-10");
         Assertions.assertEquals("2024-04-10", datePicker.getAttribute("value"),
                 "Значение datePicker не соответствует ожидаемому");
+        datePicker.clear();
     }
 
     @Test
     @DisplayName("Example Range test")
+    @Step("Example Range")
     void rangeTest(){
         WebElement range = webFormPage.getExampleRange();
         // Получаем значение атрибута 'value' текущего диапазона
@@ -171,20 +200,22 @@ public class WebFormPageTest {
 
     @Test
     @DisplayName("Header test")
+    @Step("Header text")
     void headerTest(){
-        org.assertj.core.api.Assertions.assertThat(webFormPage.headerComponent().getTitleText()).isEqualTo("Hands-On Selenium WebDriver with Java");
-        org.assertj.core.api.Assertions.assertThat(webFormPage.headerComponent().getSubTitleText()).isEqualTo("Practice site");
+        assertThat(webFormPage.headerComponent().getTitleText()).isEqualTo("Hands-On Selenium WebDriver with Java");
+        assertThat(webFormPage.headerComponent().getSubTitleText()).isEqualTo("Practice site");
         webFormPage.headerComponent().clickLogo();
-        org.assertj.core.api.Assertions.assertThat(webFormPage.getUrl()).isEqualTo("https://github.com/bonigarcia/selenium-webdriver-java");
+        assertThat(webFormPage.getUrl()).isEqualTo("https://github.com/bonigarcia/selenium-webdriver-java");
         webFormPage.navigateBack();
     }
 
     @Test
     @DisplayName("Footer test")
+    @Step("Footer text")
     void footerTest(){
-        org.assertj.core.api.Assertions.assertThat(webFormPage.footerComponent().footerText()).isEqualTo("Copyright © 2021-2024 Boni García");
+        assertThat(webFormPage.footerComponent().footerText()).isEqualTo("Copyright © 2021-2024 Boni García");
         webFormPage.footerComponent().clickLink();
-        org.assertj.core.api.Assertions.assertThat(webFormPage.getUrl()).isEqualTo("https://bonigarcia.dev/");
+        assertThat(webFormPage.getUrl()).isEqualTo("https://bonigarcia.dev/");
         webFormPage.navigateBack();
     }
 
