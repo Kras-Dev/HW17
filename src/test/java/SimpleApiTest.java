@@ -1,16 +1,17 @@
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import modelsAPI.User;
 import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Tag("Rest Assured Simple Tests")
 public class SimpleApiTest {
     private final static String URL = "https://petstore.swagger.io/v2/user";
-    private static String USERNAME = "testUser";
+    private String USERNAME = "testUser";
     @AfterAll
     void cleanupTestData(){
         // Проверка существования пользователя перед удалением
@@ -114,8 +115,41 @@ public class SimpleApiTest {
     }
 
     @Test
-    @DisplayName("Delete User Test")
+    @DisplayName("PUT with model User Test")
     @Order(4)
+    void putWithModelUserTest(){
+        User user = new User(0, "modelUser", "modelFirstName", "modelLastName", "model@example.com",
+                "modelPassword", "11223344", 0);
+
+        ValidatableResponse response = given()
+                .header("accept", "application/json")
+                .header("Content-Type", "application/json")
+                .body(user)
+                .when()
+                .put(URL + "/{username}", USERNAME)
+                .then()
+                .statusCode(200);
+
+        USERNAME = user.getUsername();
+        //Для проверки, что пользователь был успешно изменён
+        given()
+                .when()
+                .get(URL + "/{username}", USERNAME)
+                .then()
+                .log()
+                .all()
+                .assertThat()
+                .statusCode(200)
+                .body("username", equalTo("modelUser"))
+                .body("firstName", startsWith("modelFirstName"))
+                .body("lastName", equalToIgnoringCase("MODELLastName"))
+                .body("email", matchesPattern("^[a-zA-Z0-9._%+-]+@example\\.com$"))
+                .body("password", equalTo("modelPassword"))
+                .body("phone", equalTo("11223344"));
+    }
+    @Test
+    @DisplayName("Delete User Test")
+    @Order(5)
     void deleteUserTest() {
         // Отправка DELETE запроса для удаления пользователя
         given()
