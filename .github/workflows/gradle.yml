@@ -32,9 +32,27 @@ jobs:
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
-
+    - name: Install Allure Commandline
+      run: |
+        sudo apt-get update && sudo apt-get install -y allure
     - name: Build with Gradle Wrapper
       run: ./gradlew build
+    - name: Check contents of build directory
+      if: always()
+      run: ls -R build
+    - name: Upload Allure Report as Artifact
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report
+        path: build/allure-results
+    - name: Deploy Allure report to GitHub Pages
+      if: always() # Execute even if previous steps fail
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Provide the GitHub token for authentication
+        publish_branch: master # Specify the branch to publish the report to
+        publish_dir: build/allure-results # Specify the directory containing the report
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
