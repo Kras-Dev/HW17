@@ -21,7 +21,7 @@ public class SeleniumBasicTests {
         driver.get(BASE_URL);
     }
 
-    @AfterAll
+    @AfterEach
     void close(){
         driver.quit();
     }
