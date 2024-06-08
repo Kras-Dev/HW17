@@ -23,7 +23,7 @@ public class SeleniumBasicTests {
 
     @AfterAll
     void close(){
-        driver.close();
+        driver.quit();
     }
 
     @Test

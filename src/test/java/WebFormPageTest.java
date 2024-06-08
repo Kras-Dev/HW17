@@ -31,14 +31,13 @@ public class WebFormPageTest extends BaseStepsAll {
         webFormPage = new WebFormPage(getDriver());
         webFormPage.openUrl(URL);
     }
-    @AfterEach
-    void pause() throws InterruptedException {
-        Thread.sleep(3000);
-    }
+//    @AfterEach
+//    void pause() throws InterruptedException {
+//        Thread.sleep(3000);
+//    }
 
     @AfterAll
-    void tearDown() throws InterruptedException {
-        Thread.sleep(5000);
+    void tearDown()  {
         webFormPage.quit();
     }
 

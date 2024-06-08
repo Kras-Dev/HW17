@@ -22,7 +22,7 @@ public class SeleniumLocatorsTest {
 
     @AfterAll
     void close(){
-        driver.close();
+        driver.quit();
     }
 
     @Test

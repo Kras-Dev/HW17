@@ -17,16 +17,16 @@ public class SeleniumActionsTest {
     WebDriver driver;
     String url;
 
-    @BeforeEach
+    @BeforeAll
     void init(){
         driver = new ChromeDriver();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
     }
 
-    @AfterEach
+    @AfterAll
     void close(){
-        driver.close();
+        driver.quit();
     }
 
     @Test

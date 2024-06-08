@@ -29,8 +29,7 @@ public class DownloadFilesPageTest extends BaseStepsAll {
     }
 
     @AfterAll
-    void tearDown() throws InterruptedException {
-        Thread.sleep(5000);
+    void tearDown() {
         downloadFilesPage.quit();
     }
 

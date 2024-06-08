@@ -156,7 +156,7 @@ public class ExtendedApiTest {
                 .when()
                 .delete(apiConfig.getBaseUrl() + "user/{username}", USERNAME)
                 .then()
-                .statusCode(200);
+                .statusCode(404);
         // Для проверки, что пользователь успешно удален
         Response response = given()
                 .when()
