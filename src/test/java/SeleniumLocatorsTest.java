@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -16,7 +16,7 @@ public class SeleniumLocatorsTest {
 
     @BeforeEach
     void init(){
-        driver = new EdgeDriver();
+        driver = new ChromeDriver();
         setupDriver(driver, BASE_URL);
     }
 

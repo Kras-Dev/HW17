@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
@@ -19,9 +19,9 @@ public class SeleniumActionsTest {
 
     @BeforeEach
     void init(){
-        driver = new EdgeDriver();
-        EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
     }
 
     @AfterEach

@@ -1,5 +1,8 @@
+import org.apache.groovy.json.internal.Chr;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.html5.LocalStorage;
@@ -25,7 +28,7 @@ public class SeleniumBrowserAgnosticFeaturesTest {
     @BeforeAll
     void start() {
         try {
-            driver = new EdgeDriver(createEdgeOptions());
+            driver = new ChromeDriver(createChromeOptions());
             driver.get(BASE_URL);
         } catch (Exception e) {
             // Вывод трассировки стека исключения
@@ -34,19 +37,19 @@ public class SeleniumBrowserAgnosticFeaturesTest {
     }
 
 
-    private EdgeOptions createEdgeOptions() {
-        EdgeOptions edgeOptions = new EdgeOptions();
+    private ChromeOptions createChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
         // Устанавливаем стратегию загрузки страницы
-        edgeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         // Принимаем незащищенные сертификаты
-        edgeOptions.setAcceptInsecureCerts(true);
+        chromeOptions.setAcceptInsecureCerts(true);
         // Устанавливаем время ожидания загрузки страницы
-        edgeOptions.setPageLoadTimeout(Duration.ofSeconds(60));
+        chromeOptions.setPageLoadTimeout(Duration.ofSeconds(60));
         // Устанавливаем время ожидания выполнения JavaScript
-        edgeOptions.setScriptTimeout(Duration.ofSeconds(30));
+        chromeOptions.setScriptTimeout(Duration.ofSeconds(30));
         // Устанавливаем неявное время ожидания элементов на странице
-        edgeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
-        return edgeOptions;
+        chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(20));
+        return chromeOptions;
     }
 
     @BeforeEach

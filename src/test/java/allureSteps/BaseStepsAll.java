@@ -10,7 +10,7 @@ public class BaseStepsAll {
 
     @BeforeAll
     public void setup() {
-        String browser = "edge";
+        String browser = "chrome";
         driver = WebDriverFactory.createWebDriver(browser);
         driver.manage().window().maximize();
     }

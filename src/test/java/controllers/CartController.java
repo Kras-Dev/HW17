@@ -61,7 +61,8 @@ public class CartController {
         return given(this.requestSpecification).get()
                 .then()
                 .statusCode(200)
-                .log().body()
+                .log()
+                .body()
                 .extract().response();
     }
 
