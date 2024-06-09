@@ -9,7 +9,7 @@ In this project we practice writing automated tests using the following tools:
 - JUnit: for writing and running unit tests.
 - Mockito: for creating and working with mocks (fake objects).
 - WireMock: for creating and emulating external HTTP requests and APIs.
-- Selenium: to automate web interface testing.
+- Selenium/Selenide: to automate web interface testing.
 - Allure: for test result reporting and visualization.
 - Rest Assured: for API testing.
 
