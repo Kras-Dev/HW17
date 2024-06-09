@@ -36,6 +36,9 @@ public class SeleniumBrowserAgnosticFeaturesTest {
 
     private ChromeOptions createChromeOptions() {
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--headless");
         // Устанавливаем стратегию загрузки страницы
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         // Принимаем незащищенные сертификаты

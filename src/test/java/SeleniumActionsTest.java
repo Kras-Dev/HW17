@@ -19,13 +19,20 @@ public class SeleniumActionsTest {
 
     @BeforeAll
     void init(){
-        driver = new ChromeDriver();
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        driver = new ChromeDriver(options);
     }
 
-    @AfterAll
+    @AfterEach
     void close(){
+        driver.close();
+    }
+    @AfterAll
+    void quit(){
         driver.quit();
     }
 
