@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static com.codeborne.selenide.Screenshots.takeScreenShotAsFile;
+
 public class AllureSteps {
     // Метод для захвата скриншота и добавления его в отчет Allure как вложение типа "image/png"
     @Attachment(value = "Screenshot", type = "image/png")
@@ -52,5 +54,16 @@ public class AllureSteps {
                 return null;
             });
         }
+    }
+
+    @Attachment(value = "Screenshot", type = "image/png")
+    @Step("Capture screenshot with Selenide")
+    public byte[] captureScreenshotSelenide() throws IOException {
+        return com.google.common.io.Files.toByteArray(takeScreenShotAsFile());
+    }
+
+    @Step("Capture screenshot with Selenide (extension)")
+    public void captureScreenshotSelenideSpoiler() throws IOException {
+        Allure.addAttachment("Screenshot", new ByteArrayInputStream(com.google.common.io.Files.toByteArray(takeScreenShotAsFile())));
     }
 }
