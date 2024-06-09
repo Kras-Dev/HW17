@@ -46,11 +46,11 @@ tasks.withType(JavaCompile) {
 //test {
 //    systemProperty 'file.encoding', 'UTF-8'
 //}
-//tasks.register('selenium', Test) {
-//    useJUnitPlatform() {
-//        includeTags 'selenium'
-//    }
-//}
+tasks.register('Selenide', Test) {
+    useJUnitPlatform() {
+        includeTags 'Selenide'
+    }
+}
 
 //tasks.register('smokeTest', Test) {
 //    useJUnitPlatform() {
