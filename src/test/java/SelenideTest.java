@@ -28,11 +28,11 @@ public class SelenideTest {
 
     @BeforeAll
     void setup(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-        options.addArguments("--no-sandbox"); // Bypass OS security model
-        options.addArguments("--headless"); // without browser interface
-        Configuration.browserCapabilities = options;
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+//        options.addArguments("--no-sandbox"); // Bypass OS security model
+//        options.addArguments("--headless"); // without browser interface
+//        Configuration.browserCapabilities = options;
     }
 
     @BeforeEach
@@ -94,7 +94,7 @@ public class SelenideTest {
     @Test
     @DisplayName("Dropdown list test")
     public void dropdownListTest() {
-        $(By.name("my-select")).shouldBe(visible).selectOption("Two");
+        $(By.name("my-select")).shouldBe(visible).selectOptionByValue("Two");
         $(By.name("my-select")).shouldHave(value("Two"));
     }
 
