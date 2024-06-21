@@ -24,3 +24,6 @@ We tested the following resources in our automated tests:
 1. Clone the repository to your local computer.
 2. Install the required dependencies.
 3. Run sanity tests.
+### Others
+- [WireMock Examples] (https://github.com/basdijkstra/wiremock-workshop/tree/main/src/test/java/answers)
+
